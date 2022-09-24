@@ -1,0 +1,13 @@
+.h3 {
+    margin: 5px 5px;
+}
+
+.gap {
+    margin: 4px;
+}
+
+.buttonBox {
+    position: absolute;
+    bottom:0;
+    right:0;
+}
