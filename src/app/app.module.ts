@@ -3,11 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
+import { ContactItemComponent } from './contacts/contact-item/contact-item.component';
+import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
+import { DocumentsComponent } from './documents/documents.component';
+import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
+import { DocumentItemComponent } from './documents/document-item/document-item.component';
+import { DocumentListComponent } from './documents/document-list/document-list.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageItemComponent } from './messages/message-item/message-item.component';
+import { MessageEditComponent } from './messages/message-edit/message-edit.component';
+import { MessageListComponent } from './messages/message-list/message-list.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +24,16 @@ import { HeaderComponent } from './header/header.component';
     ContactsComponent,
     ContactDetailComponent,
     ContactListComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContactItemComponent,
+    DocumentsComponent,
+    DocumentDetailComponent,
+    DocumentItemComponent,
+    DocumentListComponent,
+    MessagesComponent,
+    MessageItemComponent,
+    MessageEditComponent,
+    MessageListComponent
   ],
   imports: [
     BrowserModule,

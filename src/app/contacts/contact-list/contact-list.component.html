@@ -5,20 +5,15 @@
         <h3 class="h3">Contacts</h3>
       </div>
       <div class="col-md-6">
-        <span class="pull-right"><button class="btn btn-success">New Contact</button></span>
+        <span class="pull-right"
+          ><button class="btn btn-success">New Contact</button></span
+        >
       </div>
     </div>
   </div>
   <div class="panel-body">
-    <div class="row panel-body" *ngFor="let contact of contacts">
-      <div class="col-sm-8">
-        {{ contact.name }}
-      </div>
-      <img
-        class="col-sm-4 img-rounded"
-        [src]="contact.imageUrl"
-        [alt]="contact.name"
-      />
+    <div class="list-group" *ngFor="let contactEl of contacts">
+     <cms-contact-item [contact]="contactEl" (click)="onSelected(contactEl)"></cms-contact-item>
     </div>
   </div>
 </div>
