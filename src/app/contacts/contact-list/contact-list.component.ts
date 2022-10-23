@@ -14,6 +14,8 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts()
+    this.contactService.contactChangedEvent
+      .subscribe(item => this.contacts = item)
   }
 
   onSelected(contact: Contact) {

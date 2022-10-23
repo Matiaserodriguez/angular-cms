@@ -1,17 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="h3">{{ contact.name }}</h3>
+    <h3 class="h3">{{ contact?.name }}</h3>
     <div class="row">
-      <img class="col-md-4" [src]="contact.imageUrl" [alt]="contact.name" />
+      <img class="col-md-4" [src]="contact?.imageUrl" [alt]="contact?.name" />
       <div class="btn-group col-md-8">
-        <span class="pull-right"><button type="button" class="btn btn-danger gap">Delete</button></span>
-        <span class="pull-right"><button type="button" class="btn btn-primary gap">Edit</button></span>
+        <span class="pull-right"><a (click)="onDelete()" class="btn btn-danger gap">Delete</a></span>
+        <span class="pull-right"><a [routerLink]="['/contacts', contact?.id, 'edit']" class="btn btn-primary gap">Edit</a></span>
       </div>
     </div>
   </div>
 
   <div class="panel-body">
-    <p><strong>Email:</strong> {{ contact.email }}</p>
-    <p><strong>Phone:</strong> {{ contact.phone }}</p>
+    <p><strong>Email:</strong> {{ contact?.email }}</p>
+    <p><strong>Phone:</strong> {{ contact?.phone }}</p>
   </div>
 </div>
