@@ -53,7 +53,7 @@ export class DocumentService {
     this.documentListChangedEvent.next(documentsListClone)
   }
 
-  updateDocument(originalDocument: Document, newDocument: Document) {
+  updateDocument(originalDocument: Document | null, newDocument: Document) {
     if (!originalDocument || !newDocument) return;
 
     const pos = this.documents.indexOf(originalDocument)

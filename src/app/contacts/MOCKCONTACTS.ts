@@ -8,7 +8,7 @@ export const MOCKCONTACTS: Contact[] = [
     name: 'Matias Rodriguez',
     email: 'matias.rodriguez@byui.edu',
     phone: '333-333-3333',
-    imageUrl: '',
+    imageUrl: '../../assets/images/matiasrodriguez.jpg',
     group: [],
   },
   {

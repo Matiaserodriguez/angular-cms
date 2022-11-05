@@ -41,7 +41,7 @@ export class ContactService {
     this.contactListChangedEvent.next(contactsListClone)
   }
 
-  updateContact(originalContact: Contact, newContact: Contact) {
+  updateContact(originalContact: Contact | null, newContact: Contact) {
     if (!originalContact || !newContact) return;
 
     const pos = this.contacts.indexOf(originalContact)
