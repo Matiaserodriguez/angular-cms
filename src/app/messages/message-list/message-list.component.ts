@@ -15,7 +15,7 @@ export class MessageListComponent implements OnInit {
 
   ngOnInit(): void {
     this.messages = this.messageService.getMessages()
-    this.messageService.messageChangedEvent
+    this.messageService.messageListChangedEvent
       .subscribe(item => this.messages = item)
   };
 
