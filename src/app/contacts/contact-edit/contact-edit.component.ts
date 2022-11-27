@@ -36,7 +36,7 @@ export class ContactEditComponent implements OnInit {
         if(!this.originalContact) return;
         this.editMode = true;
         this.contact = {...this.originalContact};
-        if(this.contact.group.length > 0) {
+        if(this.contact.group && this.contact.group.length > 0) {
           this.groupContacts = [...this.contact.group];
         }
       }

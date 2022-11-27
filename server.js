@@ -1,3 +1,4 @@
+var mongoose = require('mongoose');
 // Get dependencies
 const express = require('express');
 const path = require('path');
@@ -46,16 +47,28 @@ app.use(express.static(path.join(__dirname, 'dist/angular-cms')));
 
 // Tell express to map the default route ('/') to the index route
 app.use('/', index);
+
+// ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
 app.use('/messages', messageRoutes);
 app.use('/contacts', contactRoutes);
 app.use('/documents', documentsRoutes);
-
-// ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
 
 // Tell express to map all other non-defined routes back to the index page
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/angular-cms/index.html'));
 });
+
+// establish a connection to the mongo database
+mongoose.connect('mongodb://localhost:27017/cms',
+   { useNewUrlParser: true }, (err, res) => {
+      if (err) {
+         console.log('Connection failed: ' + err);
+      }
+      else {
+         console.log('Connected to database!');
+      }
+   }
+);
 
 // Define the port address and tell express to use this port
 const port = process.env.PORT || '3000';

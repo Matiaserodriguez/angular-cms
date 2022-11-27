@@ -17,24 +17,17 @@ export class MessageService {
     // this.messages = MOCKMESSAGES;
    }
 
-   getMessages(): Message[] {
-    this.httpClient.get('https://cms-project-61cff-default-rtdb.firebaseio.com/messages.json')
-      .subscribe((messages: Message[] ) => {
-          this.messages = messages;
-          this.maxMessageId = this.getMaxId();
-          messages.sort((a: Message, b: Message) => {
-            if (a < b) return -1;
-            else if (a > b) return 1;
-            else return 0;
-          });
-          const clonedMessages = messages.slice()
-          this.messageListChangedEvent.next(clonedMessages);
-      }, (error: any) => {
-          console.log(error);
-      }
-    )
+   getMessages() {
+    this.httpClient.get<{messages: Message[]}>("http://localhost:3000/messages")
+      .subscribe(response => {
+        console.log(response.messages);
+        this.messages = response.messages ? response.messages : [];
+        this.sortAndSend();
+      });
+    
     return this.messages.slice();
-  } 
+  }
+
   getMessage(id: string): Message | null {
     for (let message of this.messages) {
       if (message.id == id) {
@@ -56,25 +49,37 @@ export class MessageService {
     return maxId
   }
 
-   addMessage(message: Message): void {
-    this.messages.push(message);
-    const messagesListClone = this.messages.slice();
-    this.storeMessages(messagesListClone);
-   }
+  addMessage(message: Message) {
+    if (!message) {
+      return;
+    }
+  
+    // make sure id of the new Message is empty
+    message.id = '';
+  
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+  
+    // add to database
+    this.httpClient.post<{ message: string, messages: Message }>('http://localhost:3000/messages',
+      message,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          // add new message to messages
+          this.messages.push(responseData.messages);
+          this.sortAndSend();
+        }
+      );
+  }
 
-   storeMessages(messagesListClone: Message[]) {
-    const messagesJson = JSON.stringify(messagesListClone);
-    const httpHeader = new HttpHeaders(
-      {'Content-Type': 'application/json'},
-    );
-    this.httpClient.put(
-      'https://cms-project-61cff-default-rtdb.firebaseio.com/messages.json',
-       messagesJson, 
-       {headers: httpHeader}
-    ).subscribe(
-      () => {
-        this.messageListChangedEvent.next(messagesListClone);
-      }
-    )
-  } 
+  sortAndSend() {
+    this.maxMessageId = this.getMaxId();
+    this.messages.sort((a: Message, b: Message) => {
+      if (a < b) return -1;
+      else if (a > b) return 1;
+      else return 0;
+    });
+    const clonedMessages = this.messages.slice()
+    this.messageListChangedEvent.next(clonedMessages);
+  }
 }
